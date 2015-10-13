@@ -47,8 +47,4 @@ public class DigestUtil {
 
         return base64EncodeBytes(mdbytes);
     }
-
-    public static void main(String[] args) throws Exception {
-        System.out.println(getFileHash("SHA-256", "/Users/zjh/Downloads/test.docx"));
-    }
 }
