@@ -4,7 +4,8 @@
             [clj-http.client :as client]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]])
   (:import (hermione DigestUtil)
-           (java.io File)))
+           (java.io File)
+           (java.text SimpleDateFormat)))
 
 (def test-url "http://7xj0bp.com1.z0.glb.clouddn.com/test.docx")
 (def test-path "/Users/zjh/Downloads/test.docx")
@@ -18,8 +19,10 @@
   (GET "/api/wopi/files/:name" [name]
     (do
       (write-file-s)
-      (let [file (File. test-path)]
-        (println "length -> " (.length file)))
+      (let [file (File. test-path)
+            sdf (SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss")]
+        (println "length -> " (.length file))
+        (println "last modify -> " (.format sdf (.lastModified file))))
       (println "sha256 -> " (DigestUtil/getFileHash "SHA-256" test-path))
       "hehe"))
   (GET "/api/wopi/files/:name/contents" [name] (str name " file contents"))
