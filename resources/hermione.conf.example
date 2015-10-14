@@ -1,4 +1,6 @@
 hermione {
   basepath="basepath"
   baseurl="baseurl"
+  ak="accesskey"
+  sk="secretkey"
 }

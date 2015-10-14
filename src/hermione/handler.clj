@@ -7,17 +7,22 @@
             [mimina.config :refer :all]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]])
   (:import (hermione DigestUtil)
+           (com.qiniu.util Auth)
            (java.io File)
            (java.text SimpleDateFormat)))
 
 (def base-url (get-property (get-config "hermione") "hermione" "baseurl"))
 (def base-path (get-property (get-config "hermione") "hermione" "basepath"))
+(def ak (get-property (get-config "hermione") "hermione" "ak"))
+(def sk (get-property (get-config "hermione") "hermione" "sk"))
+(def auth (Auth/create ak sk))
 
 (def sdf (SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss"))
 
 (defn gen-url
   [name]
-  (str base-url name))
+  (let [public-url (str base-url name)]
+    (.privateDownloadUrl auth public-url)))
 
 (defn gen-path
   [name]
