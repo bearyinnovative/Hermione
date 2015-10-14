@@ -2,6 +2,7 @@
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.json :refer [wrap-json-response]]
+            [ring.util.response :refer [file-response header]]
             [clj-http.client :as client]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]])
   (:import (hermione DigestUtil)
@@ -45,7 +46,10 @@
                      :Size         size
                      :SHA256       sha256
                      :Version      version}))))
-  (GET "/api/wopi/files/:name/contents" [name] (str name " file contents"))
+  (GET "/api/wopi/files/:name/contents" [name]
+    (let [filepath (gen-path name)
+          resp (file-response filepath)]
+      (header resp "Content-Type" "application/octet-stream")))
   (route/not-found "Not Found"))
 
 (def app
