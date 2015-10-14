@@ -42,7 +42,7 @@
               sha256 (DigestUtil/getFileHash "SHA-256" (gen-path name))
               version (.format sdf (.lastModified file))]
           (response {:BaseFileName name
-                     :OwerId       "admin"
+                     :OwnerId "admin"
                      :Size         size
                      :SHA256       sha256
                      :Version      version}))))
