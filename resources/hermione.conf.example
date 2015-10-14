@@ -3,4 +3,5 @@ hermione {
   baseurl="baseurl"
   ak="accesskey"
   sk="secretkey"
+  bucket="bucketname"
 }
