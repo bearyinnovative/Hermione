@@ -1,0 +1,4 @@
+hermione {
+  basepath="basepath"
+  baseurl="baseurl"
+}

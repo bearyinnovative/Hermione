@@ -4,13 +4,14 @@
             [ring.middleware.json :refer [wrap-json-response]]
             [ring.util.response :refer [file-response header]]
             [clj-http.client :as client]
+            [mimina.config :refer :all]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]])
   (:import (hermione DigestUtil)
            (java.io File)
            (java.text SimpleDateFormat)))
 
-(def base-url "http://7xj0bp.com1.z0.glb.clouddn.com/")
-(def base-path "/Users/zjh/Downloads/")
+(def base-url (get-property (get-config "hermione") "hermione" "baseurl"))
+(def base-path (get-property (get-config "hermione") "hermione" "basepath"))
 
 (def sdf (SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss"))
 

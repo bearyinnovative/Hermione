@@ -10,6 +10,7 @@
                  [ring/ring-defaults "0.1.2"]
                  [clj-http "2.0.0"]
                  [ring/ring-json "0.4.0"]
+                 [mimina "0.1.0"]
                  [commons-codec/commons-codec "1.10"]]
   :plugins [[lein-ring "0.8.13"]]
   :ring {:handler hermione.handler/app}
