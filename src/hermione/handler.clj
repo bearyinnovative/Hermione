@@ -25,11 +25,17 @@
         resp (file-response filepath)]
     (header resp "Content-Type" "application/octet-stream")))
 
+(defn get-pdf-file
+  [name]
+  (gen-pdf-url name))
+
 (defroutes app-routes
   (GET "/api/wopi/files/:name" [name]
     (get-file-info name))
   (GET "/api/wopi/files/:name/contents" [name]
     (get-file-content name))
+  (GET "/api/pdf/files/:name" [name]
+    (get-pdf-file name))
   (route/not-found "Not Found"))
 
 (def app

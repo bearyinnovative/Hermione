@@ -13,10 +13,19 @@
 (def auth (Auth/create ak sk))
 (def bucket-manager (BucketManager. auth))
 
+(defn gen-public-url
+  [name]
+  (str baseurl name))
+
 (defn gen-url
   [name]
-  (let [public-url (str baseurl name)]
-    (.privateDownloadUrl auth public-url)))
+  (->> (gen-public-url name)
+       (.privateDownloadUrl auth)))
+
+(defn gen-pdf-url
+  [name]
+  (->> (str (gen-public-url name) "?odconv/pdf")
+       (.privateDownloadUrl auth)))
 
 (defn gen-path
   [name]
