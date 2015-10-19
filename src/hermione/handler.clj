@@ -29,6 +29,10 @@
   [name]
   (gen-pdf-url name))
 
+(defn download-pdf-file
+  [name]
+  (gen-pdf-download-url name))
+
 (defroutes app-routes
   (GET "/api/wopi/files/:name" [name]
     (get-file-info name))
@@ -36,6 +40,8 @@
     (get-file-content name))
   (GET "/api/pdf/files/:name" [name]
     (get-pdf-file name))
+  (GET "/api/pdf/files/:name/download" [name]
+    (download-pdf-file name))
   (route/not-found "Not Found"))
 
 (def app
