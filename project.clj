@@ -12,7 +12,8 @@
                  [ring/ring-json "0.4.0"]
                  [mimina "0.1.0"]
                  [com.qiniu/qiniu-java-sdk "7.0.5"]
-                 [commons-codec/commons-codec "1.10"]]
+                 [commons-codec/commons-codec "1.10"]
+                 [com.typesafe/config "1.2.1"]]
   :plugins [[lein-ring "0.8.13"]]
   :ring {:handler hermione.handler/app}
   :profiles
