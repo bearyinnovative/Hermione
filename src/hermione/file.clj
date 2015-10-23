@@ -17,7 +17,7 @@
   [name]
   (str baseurl name))
 
-(defn gen-url
+(defn gen-private-url
   [name]
   (->> (gen-public-url name)
        (.privateDownloadUrl auth)))
@@ -56,7 +56,7 @@
   [name]
   (try
     (clojure.java.io/copy
-      (:body (client/get (gen-url name) {:as :stream}))
+      (:body (client/get (gen-private-url name) {:as :stream}))
       (File. (gen-path name))
       true)
     (catch Exception _ false)))
