@@ -2,6 +2,7 @@ hermione {
   basepath="basepath"
   baseurl="baseurl"
   fopcallbackurl=""
+  mpsprefix=""
   ak="accesskey"
   sk="secretkey"
   bucket="bucketname"
