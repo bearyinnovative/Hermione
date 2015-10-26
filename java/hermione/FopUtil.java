@@ -47,7 +47,7 @@ public class FopUtil {
     }
 
     //fop operation
-    public String resourceOperation(String key) {
+    public String fopOperation(String key, String operation) {
         String notifyURL = this.fopcallbackurl;
         boolean force = true;
         //每一个账号有四个私有MPS队列,可以为每一个fop任务(比如文档转换任务)随机分配一个私有队列最大化利用资源
@@ -59,7 +59,7 @@ public class FopUtil {
                 .putWhen("force", 1, force).putNotEmpty("pipeline", pipeline);
 
         //http://developer.qiniu.com/docs/v6/api/reference/fop/odconv.html
-        String fops = "odconv/pdf";
+        String fops = operation;
 
         try {
             // 针对指定空间的文件触发 pfop 操作

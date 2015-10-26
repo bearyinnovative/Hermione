@@ -37,7 +37,7 @@
 
 (defn translate-pdf-file
   [name]
-  (.resourceOperation (FopUtil. ak sk bucket fopcallbackurl mpsprefix) name))
+  (.fopOperation (FopUtil. ak sk bucket fopcallbackurl mpsprefix) name "odconv/pdf"))
 
 (defroutes app-routes
   (GET "/api/wopi/files/:name" [name]
