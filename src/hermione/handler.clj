@@ -1,7 +1,7 @@
 (ns hermione.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
-            [ring.middleware.json :refer [wrap-json-response]]
+            [ring.middleware.json :refer [wrap-json-body wrap-json-params wrap-json-response]]
             [ring.util.response :refer [file-response header]]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [hermione.file :refer :all]
@@ -50,9 +50,16 @@
     (download-pdf-file name))
   (GET "/api/pdf/files/:name/translate" [name]
     (translate-pdf-file name))
+  (POST "/fopcallback" request
+    (let [inputkey (-> request :params :inputKey)
+          targetkey (-> request :params :items first :key)]
+      (println inputkey " - " targetkey)
+      "ok"))
   (route/not-found "Not Found"))
 
 (def app
   (-> app-routes
-      (wrap-defaults site-defaults)
+      (wrap-defaults (assoc-in site-defaults [:security :anti-forgery] false))
+      wrap-json-body
+      wrap-json-params
       wrap-json-response))
