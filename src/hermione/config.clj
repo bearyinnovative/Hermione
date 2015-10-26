@@ -15,4 +15,4 @@
                  `(gen-config ~name))]
     `(do ~@(map map-fn names))))
 
-(gen-configs [baseurl basepath ak sk bucket])
+(gen-configs [baseurl basepath ak sk bucket fopcallbackurl mpsprefix])

@@ -4,7 +4,8 @@
             [ring.middleware.json :refer [wrap-json-response]]
             [ring.util.response :refer [file-response header]]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-            [hermione.file :refer :all])
+            [hermione.file :refer :all]
+            [hermione.config :refer :all])
   (:import (hermione FopUtil)))
 
 (defn response [data & [status]]
@@ -36,7 +37,7 @@
 
 (defn translate-pdf-file
   [name]
-  (.resourceOperation (FopUtil.) name))
+  (.resourceOperation (FopUtil. ak sk bucket fopcallbackurl mpsprefix) name))
 
 (defroutes app-routes
   (GET "/api/wopi/files/:name" [name]

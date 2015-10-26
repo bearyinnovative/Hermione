@@ -15,17 +15,29 @@ public class FopUtil {
     String bucketName;
     OperationManager operater;
     Auth auth;
-    String avthumbcallbackurl;
+    String fopcallbackurl;
     String mpsprefix;
+    String ak;
+    String sk;
 
     public FopUtil() {
         String ak = ConfigManager.getConfiguration("ak");
         String sk = ConfigManager.getConfiguration("sk");
         this.bucketName = ConfigManager.getConfiguration("bucket");
-        this.avthumbcallbackurl = ConfigManager.getConfiguration("fopcallbackurl");
+        this.fopcallbackurl = ConfigManager.getConfiguration("fopcallbackurl");
         this.auth = Auth.create(ak, sk);
         this.operater = new OperationManager(this.auth);
         this.mpsprefix = ConfigManager.getConfiguration("mpsprefix");
+    }
+
+    public FopUtil(String ak, String sk, String bucketName, String fopcallbackurl, String mpsprefix) {
+        this.ak = ak;
+        this.sk = sk;
+        this.bucketName = bucketName;
+        this.fopcallbackurl = fopcallbackurl;
+        this.auth = Auth.create(ak, sk);
+        this.operater = new OperationManager(this.auth);
+        this.mpsprefix = mpsprefix;
     }
 
     private String getPipelineName() {
@@ -36,7 +48,7 @@ public class FopUtil {
 
     //fop operation
     public String resourceOperation(String key) {
-        String notifyURL = this.avthumbcallbackurl;
+        String notifyURL = this.fopcallbackurl;
         boolean force = true;
         //每一个账号有四个私有MPS队列,可以为每一个fop任务(比如文档转换任务)随机分配一个私有队列最大化利用资源
         String pipeline = getPipelineName();
