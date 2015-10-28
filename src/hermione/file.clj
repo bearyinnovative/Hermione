@@ -32,6 +32,11 @@
   (->> (str (gen-public-url name) "?odconv/pdf&attname=abc.pdf")
        (.privateDownloadUrl auth)))
 
+(defn gen-avinfo-url
+  [name]
+  (->> (str (gen-public-url name) "?avinfo")
+       (.privateDownloadUrl auth)))
+
 (defn gen-path
   [name]
   (str basepath name))

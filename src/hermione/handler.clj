@@ -35,6 +35,10 @@
   [name]
   (gen-pdf-download-url name))
 
+(defn get-file-avinfo
+  [name]
+  (gen-avinfo-url name))
+
 (defn translate-pdf-file
   [name]
   (.fopOperation (FopUtil. ak sk bucket fopcallbackurl mpsprefix) name "odconv/pdf"))
@@ -50,6 +54,8 @@
     (download-pdf-file name))
   (GET "/api/pdf/files/:name/translate" [name]
     (translate-pdf-file name))
+  (GET "/api/files/avinfo/:name" [name]
+    (get-file-avinfo name))
   (POST "/fopcallback" request
     (let [inputkey (-> request :params :inputKey)
           targetkey (-> request :params :items first :key)]
